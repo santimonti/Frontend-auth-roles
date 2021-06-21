@@ -1,0 +1,146 @@
+<html>
+  <body>
+    <div class="d-flex flex-column min-height">
+      <ng-container *ngIf="!start">
+        <div class="row card w-50 m-auto">
+          <mat-card>
+            <mat-card-header>Select a topic</mat-card-header>
+            <mat-card-content>
+              <form #quizForm="ngForm" (submit)="getQuestions(inputSearch)">
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <mat-icon matPrefix>quiz</mat-icon>
+                  <mat-label>Topic</mat-label>
+                  <mat-select [(ngModel)]="inputSearch" name="topic" required>
+                    <mat-option value="music">Music</mat-option>
+                    <mat-option value="sports">Sports</mat-option>
+                    <mat-option value="nodejs">Nodejs</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button
+                  [disabled]="quizForm.invalid"
+                  type="submit"
+                  class="btn btn-primary btn-block w-100"
+                >
+                  Start quiz
+                </button>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="finish">
+        <ng-container *ngIf="correct.length >= wrong.length; else noPass">
+          <div class="card border-success text-center m-auto mt-3 mb-3">
+            <img
+              src="https://www.cimaglobal.com/EmailFiles/images/2015%20Student%20Journey%20email%20assets/Email%20headers/12-congratulations-584x187.jpg"
+              class="card-img-top"
+              alt="CONGRATS YOU DID IT!!"
+            />
+            <div class="card-body text-success">
+              <h5 class="card-title">CONGRATS</h5>
+              <p class="card-text">
+                Congrats! Correct answers: {{ correct }}
+                <br />
+                Wrong answers: {{ wrong }}
+                <br />
+                Time: {{ display }} Seconds
+              </p>
+              <a routerLink="/home" class="btn btn-primary">Go to Home</a>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noPass>
+          <div
+            class="card border-danger text-center m-auto mt-3 mb-3"
+            style="width: 18rem"
+          >
+            <img
+              src="https://stickershop.line-scdn.net/stickershop/v1/product/3238022/LINEStorePC/main.png;compress=true"
+              class="card-img-top"
+              alt="Nope"
+            />
+            <div class="card-body text-danger">
+              <h5 class="card-title">:(</h5>
+              <p class="card-text">
+                Sad news.. you couldn't pass :(
+                <br />
+
+                Correct answers: {{ correct }}
+                <br />
+                Wrong answers: {{ wrong }}
+                <br />
+                Time: {{ display }} Seconds
+              </p>
+              <a routerLink="/home" class="btn btn-primary">Go to Home</a>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <div *ngIf="start" class="min-height">
+        <button
+          class="d-flex btn btn-primary pe-none w-30 m-auto mt-3 mb-3"
+          *ngIf="!finish"
+        >
+          {{ display }} Seconds
+        </button>
+        <form #quizForm="ngForm">
+          <div class="container-fluid content-row">
+            <div class="row">
+              <div
+                *ngFor="let question of questions; let j = index"
+                class="col-sm-3 mb-4"
+              >
+                <div class="card h-100" id="{{ j }}">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      {{ j + 1 }}. {{ question.question }}
+                    </h5>
+                    <ul class="card-text">
+                      <mat-radio-group
+                        [(ngModel)]="selected[j]"
+                        name="{{ j }}"
+                        required
+                      >
+                        <div
+                          *ngFor="let option of question.options; let i = index"
+                        >
+                          <mat-radio-button
+                            type="radio"
+                            value="{{ i + 1 }}"
+                          ></mat-radio-button>
+
+                          <mat-label>
+                            {{ option }}
+                          </mat-label>
+                        </div>
+                      </mat-radio-group>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="d-flex btn btn-dark text-center m-auto"
+            (click)="checkQuestion()"
+            *ngIf="!finish"
+            [disabled]="quizForm.invalid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+
+topic: string;
+  question: string;
+  options: string[];
+  answer: string;
+
+-->

@@ -1,0 +1,122 @@
+<body>
+  <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
+      <mat-card-header class="justify-content-md-center">
+        <mat-card-title class="pb-4">Question</mat-card-title>
+      </mat-card-header>
+
+      <form #userform="ngForm" (submit)="createQuiz()">
+        <mat-card-content>
+          <mat-form-field appearance="fill" fxLayoutAlign="center center">
+            <mat-icon matPrefix>quiz</mat-icon>
+            <mat-label>Topic</mat-label>
+
+            <mat-select [(ngModel)]="questions.topic" name="topic" required>
+              <mat-option value="music">Music</mat-option>
+              <mat-option value="sports">Sports</mat-option>
+              <mat-option value="nodejs">Nodejs</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Question</mat-label>
+            <mat-icon matPrefix>quiz</mat-icon>
+            <textarea
+              [(ngModel)]="questions.question"
+              cdkTextareaAutosize
+              type="text"
+              matInput
+              name="question"
+              placeholder="Ex@ Nodejs is a framework? "
+              required
+            ></textarea>
+            <mat-error *ngIf="exists">This question already exist</mat-error>
+          </mat-form-field>
+          <br />
+
+          <mat-form-field appearance="fill" class="w-100 ms-4">
+            <mat-label>Answer One</mat-label>
+            <mat-icon matPrefix>looks_one</mat-icon>
+            <input
+              [(ngModel)]="option1"
+              type="text"
+              matInput
+              cdkTextareaAutosize
+              name="answerOne"
+              placeholder="Ex@ Yes"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-100 ms-4">
+            <mat-label>Answer Two</mat-label>
+            <mat-icon matPrefix>looks_two</mat-icon>
+            <input
+              [(ngModel)]="option2"
+              type="text"
+              matInput
+              name="answerTwo"
+              placeholder="Ex@ No "
+              required
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" class="w-100 ms-4">
+            <mat-label>Answer Three</mat-label>
+            <mat-icon matPrefix>looks_3</mat-icon>
+            <input
+              [(ngModel)]="option3"
+              type="text"
+              matInput
+              name="answerThree"
+              placeholder="Ex@ Maybe"
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" class="w-100 ms-4">
+            <mat-label>Answer Four</mat-label>
+            <mat-icon matPrefix>looks_4</mat-icon>
+            <input
+              [(ngModel)]="option4"
+              type="text"
+              matInput
+              name="answerFour"
+              placeholder="Ex@ Something"
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" fxLayoutAlign="center center">
+            <mat-icon matPrefix>quiz</mat-icon>
+            <mat-label>Right Answer</mat-label>
+            <mat-select [(ngModel)]="questions.answer" name="answer" required>
+              <mat-select-trigger>
+                {{ questions.answer }}
+              </mat-select-trigger>
+
+              <mat-option value="1" class="text-center"
+                ><mat-icon matPrefix>looks_one</mat-icon>1</mat-option
+              >
+              <mat-option value="2" class="text-center"
+                ><mat-icon matPrefix>looks_two</mat-icon>2</mat-option
+              >
+              <mat-option value="3" class="text-center"
+                ><mat-icon matPrefix>looks_3</mat-icon>3</mat-option
+              >
+              <mat-option value="4" class="text-center"
+                ><mat-icon matPrefix>looks_4</mat-icon>4</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <button
+            [disabled]="userform.invalid"
+            type="submit"
+            class="btn btn-primary btn-block w-100"
+          >
+            Create Question
+          </button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</body>

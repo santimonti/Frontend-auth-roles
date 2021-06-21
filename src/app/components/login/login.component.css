@@ -1,0 +1,12 @@
+.main-wrapper mat-card-header mat-card-title {
+  font-size: 30px;
+  margin: 0;
+}
+
+.main-wrapper .mat-card {
+  padding: 45px 70px 55px;
+}
+.mat-card {
+  margin: auto;
+  margin-top: 05%;
+}

@@ -1,0 +1,86 @@
+<html>
+  <body>
+    <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+      <mat-card>
+        <mat-card-header class="justify-content-md-center">
+          <mat-card-title class="pb-4">Register</mat-card-title>
+        </mat-card-header>
+
+        <form #userform="ngForm" (submit)="register()">
+          <mat-card-content>
+            <mat-form-field appearance="fill" class="w-49">
+              <mat-icon matPrefix>face</mat-icon>
+              <mat-label>First Name</mat-label>
+              <input
+                [(ngModel)]="user.firstname"
+                name="fname"
+                type="text"
+                matInput
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-49 ps-2">
+              <mat-icon matPrefix>face</mat-icon>
+              <mat-label>Last Name</mat-label>
+
+              <input
+                [(ngModel)]="user.lastname"
+                name="lname"
+                type="text"
+                matInput
+                required
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-icon matPrefix>mail</mat-icon>
+              <mat-label>Email address</mat-label>
+              <input
+                matInput
+                type="email"
+                [(ngModel)]="user.email"
+                name="email"
+                placeholder="Ex. pat@example.com"
+                required
+              />
+            </mat-form-field>
+
+            <br />
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-label>Enter password</mat-label>
+              <input
+                matInput
+                [(ngModel)]="user.password"
+                name="password"
+                [type]="hide ? 'password' : 'text'"
+                required
+              />
+              <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <button
+              type="submit"
+              [disabled]="userform.invalid"
+              class="btn btn-primary btn-block w-100"
+            >
+              Register
+            </button>
+          </mat-card-content>
+        </form>
+      </mat-card>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<div class="container-fluid content-row">
+  <div class="row">
+    <div *ngFor="let user of users" class="col-lg-2 mt-3 w-25">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title d-flex">
+            <a title="{{ user.email }}">
+              User: {{ user.email.substring(0, 10) }}
+            </a>
+            <p *ngIf="user.email.substring(0, 10).length == 10">...</p>
+
+            <button
+              type="button"
+              class="btn-close ms-auto"
+              aria-label="Close "
+              (click)="deleteUser(user._id)"
+            ></button>
+          </h5>
+
+          <ul class="card-text list-group list-group-flush">
+            <li class="list-group-item">
+              Name:
+              {{ user.firstname }}
+              {{ user.lastname }}
+            </li>
+            <li class="list-group-item">ID: {{ user._id }}</li>
+
+            <li class="list-group-item">
+              Creation date: {{ user.createdAt.split("T")[0] }}
+            </li>
+            <li class="list-group-item">
+              <ul class="list-group">
+                Roles:
+                <li
+                  class="list-group-item m-auto w-50 text-center"
+                  *ngFor="let role of user.roles"
+                >
+                  {{ role.name }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

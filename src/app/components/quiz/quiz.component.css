@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  height: 92.4vh;
+  margin: 0;
+  padding: 0;
+}
+.min-height {
+  min-height: 100%;
+}
